@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "deny": ["Read(.docs)"]
+  },
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r 'if .tool_input.command | test(\"bun run dev\") then {\"decision\": \"block\", \"reason\": \"not allowed\"} else empty end'"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r 'if .tool_input.file_path | test(\"src/components/ui/|src/hooks/use-mobile\\\\.ts$|src/lib/utils\\\\.ts$\") then {\"decision\": \"block\", \"reason\": \"not allowed - protected file\"} else empty end'"
+          },
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path | select(endswith(\".ts\") or endswith(\".tsx\"))' | xargs -r bun run format"
+          },
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path | select(endswith(\".ts\") or endswith(\".tsx\"))' | xargs -r bun run test"
+          }
+        ]
+      }
+    ]
+  }
+}
