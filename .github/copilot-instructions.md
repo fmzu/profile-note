@@ -3,41 +3,41 @@ applyTo: "**/*"
 ---
 
 # Overview
-Fusen ToDo is a lightweight sticky-notes SPA. Users drag, resize, and edit virtual notes across the home board, a canvas demo, and a slug mini-game. The stack is Vite + React + TypeScript + TanStack Router + Tailwind CSS, running entirely in the browser with optional Cloudflare deployment hooks.
+MyProfileNote は、スマホ向け縦長カードに最大4つの「好き」カテゴリを配置し、プロフィールカードをその場で画像保存できるSPAです。やさしい文体と即時プレビューを備え、Cloudflare Workers 連携を視野に入れた拡張性の高い構成を目指します。
 
 ## Directory Structure
-- `src/routes`: Page entries such as `/`, `/board`, `/canvas`, `/slug`
-- `src/components`: Reusable UI pieces (sticky-note, task-card, task-dialog, `components/ui/*`)
-- `src/hooks`: Stateful hooks (`use-sticky-notes`, `use-tasks`, utility hooks)
-- `src/lib`: Domain helpers (`task-model.ts`, `utils.ts`, `hono/index.ts`)
-- `src/styles/app.css`: Global Tailwind layer configuration
-- `src/router.tsx`, `src/route-tree.gen.ts`: Router setup and generated route manifest
-- `public/`: Static assets
-- `dist/`: Build output (`vite build`)
+- `src/routes`: 4ページ構成（`index.tsx` `/`, `select.tsx` `/select`, `create.tsx` `/create`, `done.tsx` `/done`）
+- `src/components`: 入力フォーム、プレビューカード、共通UI部品を配置
+- `src/lib`: 状態更新ロジック、html-to-image ラッパー、Hono 用エントリ
+- `src/store`: Zustand + Reducer ストア
+- `src/types`: `profile.ts` などドメイン型定義
+- `src/styles/app.css`: Tailwind カスタムレイヤ
+- `public/`: パステルトーンの静的アセット
 
 ## Technical Features
-- Frontend: React 19, TypeScript 5, Vite 7
-- Routing: @tanstack/react-router (file-based routes)
-- Styling: Tailwind CSS 4 with utility UI components (`components/ui/*`)
-- Utilities: lucide-react, date-fns, clsx/cva helpers, etc.
-- Tooling: Biome for lint/format, router plugin, strict tsconfig
-- Tests: `bun test` (basic setup)
-- Deployment (optional): Wrangler config pointing at Cloudflare Pages/Workers (`wrangler.json` references `.output`)
+- React 19 + TypeScript 5 + Vite 7
+- @tanstack/react-router によるルーティング
+- Zustand（Reducer パターン）でページ間状態を保持
+- Tailwind CSS で無地パステル／角丸／余白16pxを実現
+- html-to-image でプレビューを PNG ダウンロード
+- 単体テスト（Reducer）とE2E（入力〜保存）を npm scripts で実行
+- Cloudflare Pages + Workers（Hono）展開を見据えた構成
 
 ## Decoupled Design
-- Routes (`src/routes/*`) stay thin; presentation lives in `src/components/*`
-- Domain logic and shared state live under `src/lib/*` and `src/hooks/*`
-- Core UX works offline with no external API calls
-- Optional Cloudflare Worker entry (`src/lib/hono`) stays isolated from client features
+- ルートはフロー制御に専念し、UI は `src/components` のプレゼンテーション層へ委譲
+- 状態更新は `src/store/profile-store.ts` の Reducer 経由に限定し、副作用は `src/lib` のユーティリティで隔離
+- html-to-image やダウンロード処理はファサード経由で呼び出し、テスト容易性を確保
+- Cloudflare Workers 連携は `src/lib/hono` に分離し、ブラウザ機能と疎結合を維持
 
 ## Core Location
-- Domain model: `src/lib/task-model.ts`
-- Sticky note state: `src/hooks/use-sticky-notes.ts`
-- Task list state: `src/hooks/use-tasks.ts`
-- Route orchestration: `src/routes/*.tsx`
-- Shared UI primitives: `src/components/ui/*`, `src/components/sticky-note.tsx`
+- ドメイン型: `src/types/profile.ts`
+- 状態管理: `src/store/profile-store.ts`
+- UI コンポーネント: `src/components/profile-card.tsx`, `src/components/category-selector.tsx`, `src/components/profile-form.tsx`
+- 画面ロジック: `src/routes/index.tsx`, `src/routes/select.tsx`, `src/routes/create.tsx`, `src/routes/done.tsx`
+- 画像出力: `src/lib/html-to-image-client.ts`
+- テスト: `src/store/profile-store.test.ts`, `e2e/profile-card.spec.ts`
 
 ## System Independence
-- Run locally via `npm run dev` (Vite)
-- No backend required for default flows
-- Cloudflare integration remains optional and decoupled
+- `npm run dev` でローカル動作（ブラウザ内完結）
+- ブラウザAPIのみでプレビュー生成と状態保持が完結し、オフラインでもフローが成立
+- Cloudflare 連携はオプションであり、未接続でも既存UXに影響しない

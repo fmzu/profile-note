@@ -3,8 +3,8 @@ import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router"
 import type * as React from "react"
 import { CustomErrorComponent } from "@/components/custom-error-component"
 import { NotFoundComponent } from "@/components/not-found-component"
+import { ProfileProvider } from "@/store/profile-context"
 import appCss from "@/styles/app.css?url"
-import { seo } from "@/utils/seo"
 
 export const Route = createRootRoute({
   head: () => ({
@@ -16,11 +16,20 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      ...seo({
-        title:
-          "TanStack Start | Type-Safe, Client-First, Full-Stack React Framework",
-        description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
-      }),
+      {
+        name: "description",
+        content:
+          "MyProfileNote は、好きなカテゴリを選んでプロフィールカードを作り、PNGとして保存できるアプリです。",
+      },
+      {
+        property: "og:title",
+        content: "MyProfileNote",
+      },
+      {
+        property: "og:description",
+        content:
+          "好きなカテゴリを最大4つ選んで、かわいいプロフィールカードを作成・保存しましょう。",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -44,12 +53,6 @@ export const Route = createRootRoute({
       { rel: "manifest", href: "/site.webmanifest", color: "#fffff" },
       { rel: "icon", href: "/favicon.ico" },
     ],
-    scripts: [
-      {
-        src: "/customScript.js",
-        type: "text/javascript",
-      },
-    ],
   }),
   errorComponent: CustomErrorComponent,
   notFoundComponent: () => <NotFoundComponent />,
@@ -65,7 +68,7 @@ function RootDocument(props: Props) {
         <HeadContent />
       </head>
       <body>
-        {props.children}
+        <ProfileProvider>{props.children}</ProfileProvider>
         <Scripts />
       </body>
     </html>

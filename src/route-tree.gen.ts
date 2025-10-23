@@ -9,17 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SlugRouteImport } from './routes/slug'
+import { Route as SelectRouteImport } from './routes/select'
 import { Route as ErrorRouteImport } from './routes/error'
-import { Route as CanvasRouteImport } from './routes/canvas'
-import { Route as BoardRouteImport } from './routes/board'
+import { Route as DoneRouteImport } from './routes/done'
+import { Route as CreateRouteImport } from './routes/create'
 import { Route as ApiRouteImport } from './routes/api'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SlugIndexRouteImport } from './routes/slug.index'
 
-const SlugRoute = SlugRouteImport.update({
-  id: '/slug',
-  path: '/slug',
+const SelectRoute = SelectRouteImport.update({
+  id: '/select',
+  path: '/select',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ErrorRoute = ErrorRouteImport.update({
@@ -27,14 +26,14 @@ const ErrorRoute = ErrorRouteImport.update({
   path: '/error',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CanvasRoute = CanvasRouteImport.update({
-  id: '/canvas',
-  path: '/canvas',
+const DoneRoute = DoneRouteImport.update({
+  id: '/done',
+  path: '/done',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BoardRoute = BoardRouteImport.update({
-  id: '/board',
-  path: '/board',
+const CreateRoute = CreateRouteImport.update({
+  id: '/create',
+  path: '/create',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiRoute = ApiRouteImport.update({
@@ -47,71 +46,56 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SlugIndexRoute = SlugIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => SlugRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api': typeof ApiRoute
-  '/board': typeof BoardRoute
-  '/canvas': typeof CanvasRoute
+  '/create': typeof CreateRoute
+  '/done': typeof DoneRoute
   '/error': typeof ErrorRoute
-  '/slug': typeof SlugRouteWithChildren
-  '/slug/': typeof SlugIndexRoute
+  '/select': typeof SelectRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api': typeof ApiRoute
-  '/board': typeof BoardRoute
-  '/canvas': typeof CanvasRoute
+  '/create': typeof CreateRoute
+  '/done': typeof DoneRoute
   '/error': typeof ErrorRoute
-  '/slug': typeof SlugIndexRoute
+  '/select': typeof SelectRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api': typeof ApiRoute
-  '/board': typeof BoardRoute
-  '/canvas': typeof CanvasRoute
+  '/create': typeof CreateRoute
+  '/done': typeof DoneRoute
   '/error': typeof ErrorRoute
-  '/slug': typeof SlugRouteWithChildren
-  '/slug/': typeof SlugIndexRoute
+  '/select': typeof SelectRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api' | '/board' | '/canvas' | '/error' | '/slug' | '/slug/'
+  fullPaths: '/' | '/api' | '/create' | '/done' | '/error' | '/select'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api' | '/board' | '/canvas' | '/error' | '/slug'
-  id:
-    | '__root__'
-    | '/'
-    | '/api'
-    | '/board'
-    | '/canvas'
-    | '/error'
-    | '/slug'
-    | '/slug/'
+  to: '/' | '/api' | '/create' | '/done' | '/error' | '/select'
+  id: '__root__' | '/' | '/api' | '/create' | '/done' | '/error' | '/select'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiRoute: typeof ApiRoute
-  BoardRoute: typeof BoardRoute
-  CanvasRoute: typeof CanvasRoute
+  CreateRoute: typeof CreateRoute
+  DoneRoute: typeof DoneRoute
   ErrorRoute: typeof ErrorRoute
-  SlugRoute: typeof SlugRouteWithChildren
+  SelectRoute: typeof SelectRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/slug': {
-      id: '/slug'
-      path: '/slug'
-      fullPath: '/slug'
-      preLoaderRoute: typeof SlugRouteImport
+    '/select': {
+      id: '/select'
+      path: '/select'
+      fullPath: '/select'
+      preLoaderRoute: typeof SelectRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/error': {
@@ -121,18 +105,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ErrorRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/canvas': {
-      id: '/canvas'
-      path: '/canvas'
-      fullPath: '/canvas'
-      preLoaderRoute: typeof CanvasRouteImport
+    '/done': {
+      id: '/done'
+      path: '/done'
+      fullPath: '/done'
+      preLoaderRoute: typeof DoneRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/board': {
-      id: '/board'
-      path: '/board'
-      fullPath: '/board'
-      preLoaderRoute: typeof BoardRouteImport
+    '/create': {
+      id: '/create'
+      path: '/create'
+      fullPath: '/create'
+      preLoaderRoute: typeof CreateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api': {
@@ -149,33 +133,16 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/slug/': {
-      id: '/slug/'
-      path: '/'
-      fullPath: '/slug/'
-      preLoaderRoute: typeof SlugIndexRouteImport
-      parentRoute: typeof SlugRoute
-    }
   }
 }
-
-interface SlugRouteChildren {
-  SlugIndexRoute: typeof SlugIndexRoute
-}
-
-const SlugRouteChildren: SlugRouteChildren = {
-  SlugIndexRoute: SlugIndexRoute,
-}
-
-const SlugRouteWithChildren = SlugRoute._addFileChildren(SlugRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiRoute: ApiRoute,
-  BoardRoute: BoardRoute,
-  CanvasRoute: CanvasRoute,
+  CreateRoute: CreateRoute,
+  DoneRoute: DoneRoute,
   ErrorRoute: ErrorRoute,
-  SlugRoute: SlugRouteWithChildren,
+  SelectRoute: SelectRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
