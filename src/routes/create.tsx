@@ -1,9 +1,9 @@
-import * as React from "react"
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router"
+import * as React from "react"
+import { ProfilePreviewCard } from "@/components/profile-preview-card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { ProfilePreviewCard } from "@/components/profile-preview-card"
 import { useProfileStore } from "@/store/profile-context"
 
 export const Route = createFileRoute("/create")({
@@ -19,7 +19,9 @@ function CreatePage() {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-sky-100 to-white px-4 sm:px-6">
         <div className="w-full max-w-lg rounded-3xl bg-white/90 p-8 text-center shadow-xl shadow-sky-100 sm:p-10">
-          <h1 className="text-2xl font-semibold text-slate-800">カテゴリがまだえらばれていないみたい…</h1>
+          <h1 className="text-2xl font-semibold text-slate-800">
+            カテゴリがまだえらばれていないみたい…
+          </h1>
           <p className="mt-4 text-sm leading-relaxed text-slate-600">
             もういちどカテゴリをえらんでから入力にすすもうね。
           </p>
@@ -33,7 +35,7 @@ function CreatePage() {
     )
   }
 
-  const readyToComplete = React.useMemo(function () {
+  const readyToComplete = React.useMemo(() => {
     if (profile.name.trim() === "") {
       return false
     }
@@ -53,7 +55,10 @@ function CreatePage() {
     store.updateProfileMessage(event.target.value)
   }
 
-  function handleCategoryChange(categoryId: string, event: React.ChangeEvent<HTMLTextAreaElement>) {
+  function handleCategoryChange(
+    categoryId: string,
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) {
     store.updateCategoryContent({
       categoryId,
       content: event.target.value,
@@ -70,14 +75,20 @@ function CreatePage() {
         <div className="rounded-3xl bg-white/85 p-6 shadow-2xl shadow-sky-100 backdrop-blur sm:p-10">
           <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:gap-10">
             <section>
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-500 sm:text-sm">Step 2</p>
-              <h1 className="mt-4 text-2xl font-semibold text-slate-800 sm:text-3xl">カードの内容をおしえてね</h1>
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-500 sm:text-sm">
+                Step 2
+              </p>
+              <h1 className="mt-4 text-2xl font-semibold text-slate-800 sm:text-3xl">
+                カードの内容をおしえてね
+              </h1>
               <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
                 入力すると右側のプレビューがすぐに更新されるよ。やさしい言葉で自由に書いてみよう。
               </p>
               <div className="mt-6 space-y-6 sm:mt-8">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-600">なまえ</label>
+                  <label className="text-sm font-semibold text-slate-600">
+                    なまえ
+                  </label>
                   <Input
                     value={profile.name}
                     onChange={handleNameChange}
@@ -86,7 +97,9 @@ function CreatePage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-600">ひとことメッセージ</label>
+                  <label className="text-sm font-semibold text-slate-600">
+                    ひとことメッセージ
+                  </label>
                   <Textarea
                     value={profile.message}
                     onChange={handleMessageChange}
@@ -95,26 +108,34 @@ function CreatePage() {
                   />
                 </div>
                 <div className="space-y-4">
-                  <h2 className="text-sm font-semibold text-slate-600">カテゴリの内容</h2>
-                  {profile.categories.map(function (category) {
-                    return (
-                      <div key={category.id} className="space-y-2 rounded-2xl bg-sky-50/70 p-4 shadow-inner shadow-sky-100">
-                        <p className="text-sm font-semibold text-sky-700">{category.title}</p>
-                        <Textarea
-                          value={category.content}
-                          onChange={function (event) {
-                            handleCategoryChange(category.id, event)
-                          }}
-                          placeholder="ここに好きなことを書いてみよう"
-                          className="min-h-24 rounded-xl border-sky-200 bg-white/90"
-                        />
-                      </div>
-                    )
-                  })}
+                  <h2 className="text-sm font-semibold text-slate-600">
+                    カテゴリの内容
+                  </h2>
+                  {profile.categories.map((category) => (
+                    <div
+                      key={category.id}
+                      className="space-y-2 rounded-2xl bg-sky-50/70 p-4 shadow-inner shadow-sky-100"
+                    >
+                      <p className="text-sm font-semibold text-sky-700">
+                        {category.title}
+                      </p>
+                      <Textarea
+                        value={category.content}
+                        onChange={(event) => {
+                          handleCategoryChange(category.id, event)
+                        }}
+                        placeholder="ここに好きなことを書いてみよう"
+                        className="min-h-24 rounded-xl border-sky-200 bg-white/90"
+                      />
+                    </div>
+                  ))}
                 </div>
                 <div className="flex flex-col gap-4 border-t border-slate-100 pt-6 sm:flex-row sm:items-center sm:justify-between">
                   <Link to="/select" className="w-full sm:w-auto">
-                    <Button variant="ghost" className="w-full rounded-full text-slate-500 hover:text-slate-700 sm:w-auto">
+                    <Button
+                      variant="ghost"
+                      className="w-full rounded-full text-slate-500 hover:text-slate-700 sm:w-auto"
+                    >
                       カテゴリを調整する
                     </Button>
                   </Link>
@@ -129,8 +150,12 @@ function CreatePage() {
               </div>
             </section>
             <aside className="rounded-3xl bg-gradient-to-br from-sky-200/60 via-sky-100/80 to-white p-5 shadow-lg shadow-sky-100 sm:p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-600 sm:text-sm">Live Preview</p>
-              <p className="mt-2 text-xs text-slate-600 sm:text-sm">入力した内容がリアルタイムでカードに反映されます。</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-600 sm:text-sm">
+                Live Preview
+              </p>
+              <p className="mt-2 text-xs text-slate-600 sm:text-sm">
+                入力した内容がリアルタイムでカードに反映されます。
+              </p>
               <div className="mt-4 sm:mt-6">
                 <ProfilePreviewCard profile={profile} />
               </div>

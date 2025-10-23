@@ -10,8 +10,12 @@ function renderCategory(category: ProfileCategory) {
       key={category.id}
       className="flex h-36 flex-col justify-between rounded-lg border border-white/60 bg-white/80 p-3 text-center shadow-sm"
     >
-      <span className="text-sm font-semibold text-sky-700">{category.title}</span>
-      <p className="text-xs leading-relaxed text-slate-600">{category.content || "ここに内容を書いてね"}</p>
+      <span className="text-sm font-semibold text-sky-700">
+        {category.title}
+      </span>
+      <p className="text-xs leading-relaxed text-slate-600">
+        {category.content || "ここに内容を書いてね"}
+      </p>
     </div>
   )
 }
@@ -35,15 +39,13 @@ export function ProfilePreviewCard(props: Props) {
       </div>
       <div className="mt-4 grid grid-cols-2 gap-3">
         {categories.map(renderCategory)}
-        {placeholderItems.map(function (_value, index) {
-          return (
-            <div
-              key={`placeholder-${index}`}
-              className="h-36 rounded-lg bg-sky-100/70"
-              aria-hidden
-            />
-          )
-        })}
+        {placeholderItems.map((_value, index) => (
+          <div
+            key={`placeholder-${index}`}
+            className="h-36 rounded-lg"
+            aria-hidden
+          />
+        ))}
       </div>
     </div>
   )
