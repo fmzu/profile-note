@@ -13,6 +13,7 @@ import { Route as ErrorRouteImport } from './routes/error'
 import { Route as ApiRouteImport } from './routes/api'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProfileIndexRouteImport } from './routes/profile/index'
+import { Route as LoginBonusIndexRouteImport } from './routes/login-bonus/index'
 import { Route as ProfileSelectRouteImport } from './routes/profile/select'
 import { Route as ProfileDoneRouteImport } from './routes/profile/done'
 import { Route as ProfileCreateRouteImport } from './routes/profile/create'
@@ -35,6 +36,11 @@ const IndexRoute = IndexRouteImport.update({
 const ProfileIndexRoute = ProfileIndexRouteImport.update({
   id: '/profile/',
   path: '/profile/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginBonusIndexRoute = LoginBonusIndexRouteImport.update({
+  id: '/login-bonus/',
+  path: '/login-bonus/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileSelectRoute = ProfileSelectRouteImport.update({
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/profile/create': typeof ProfileCreateRoute
   '/profile/done': typeof ProfileDoneRoute
   '/profile/select': typeof ProfileSelectRoute
+  '/login-bonus': typeof LoginBonusIndexRoute
   '/profile': typeof ProfileIndexRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/profile/create': typeof ProfileCreateRoute
   '/profile/done': typeof ProfileDoneRoute
   '/profile/select': typeof ProfileSelectRoute
+  '/login-bonus': typeof LoginBonusIndexRoute
   '/profile': typeof ProfileIndexRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/profile/create': typeof ProfileCreateRoute
   '/profile/done': typeof ProfileDoneRoute
   '/profile/select': typeof ProfileSelectRoute
+  '/login-bonus/': typeof LoginBonusIndexRoute
   '/profile/': typeof ProfileIndexRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/profile/create'
     | '/profile/done'
     | '/profile/select'
+    | '/login-bonus'
     | '/profile'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/profile/create'
     | '/profile/done'
     | '/profile/select'
+    | '/login-bonus'
     | '/profile'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/profile/create'
     | '/profile/done'
     | '/profile/select'
+    | '/login-bonus/'
     | '/profile/'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   ProfileCreateRoute: typeof ProfileCreateRoute
   ProfileDoneRoute: typeof ProfileDoneRoute
   ProfileSelectRoute: typeof ProfileSelectRoute
+  LoginBonusIndexRoute: typeof LoginBonusIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
 }
 
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login-bonus/': {
+      id: '/login-bonus/'
+      path: '/login-bonus'
+      fullPath: '/login-bonus'
+      preLoaderRoute: typeof LoginBonusIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile/select': {
       id: '/profile/select'
       path: '/profile/select'
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileCreateRoute: ProfileCreateRoute,
   ProfileDoneRoute: ProfileDoneRoute,
   ProfileSelectRoute: ProfileSelectRoute,
+  LoginBonusIndexRoute: LoginBonusIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
 }
 export const routeTree = rootRouteImport

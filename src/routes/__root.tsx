@@ -3,6 +3,7 @@ import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router"
 import type * as React from "react"
 import { CustomErrorComponent } from "@/components/custom-error-component"
 import { NotFoundComponent } from "@/components/not-found-component"
+import { LoginBonusProvider } from "@/store/login-bonus-context"
 import { ProfileProvider } from "@/store/profile-context"
 import appCss from "@/styles/app.css?url"
 
@@ -18,7 +19,7 @@ export const Route = createRootRoute({
       },
       {
         name: "description",
-        content: "MyProfile Suite bundles a profile notebook and a login bonus planner with gentle pastel UI.",
+        content: "MyProfile Suite bundles a profile notebookとセルフケア向けログインボーナスを備えたやさしいパステルUIアプリです。",
       },
       {
         property: "og:title",
@@ -26,7 +27,7 @@ export const Route = createRootRoute({
       },
       {
         property: "og:description",
-        content: "Create cute profile cards today and stay tuned for the upcoming login bonus experience.",
+        content: "プロフィール帳を作って、平日のセルフケア用ログインボーナスでも自分をねぎらおう。",
       },
     ],
     links: [
@@ -66,7 +67,9 @@ function RootDocument(props: Props) {
         <HeadContent />
       </head>
       <body>
-        <ProfileProvider>{props.children}</ProfileProvider>
+        <ProfileProvider>
+          <LoginBonusProvider>{props.children}</LoginBonusProvider>
+        </ProfileProvider>
         <Scripts />
       </body>
     </html>

@@ -22,16 +22,16 @@ function HomePage() {
                 <Button className="mt-4 w-full rounded-full bg-sky-500 text-white hover:bg-sky-400">{"開く"}</Button>
               </Link>
             </div>
-            <div className="flex flex-col rounded-2xl border border-slate-100 bg-slate-50/80 p-6 text-left shadow-md shadow-slate-100">
-              <h2 className="text-lg font-semibold text-slate-500">
-                {"ログインボーナス設定（準備中）"}
-              </h2>
-              <p className="mt-2 text-sm text-slate-500">
-                {"日課のボーナス演出を設定できるアプリを作成予定です"}
+            <div className="flex flex-col rounded-2xl border border-rose-100 bg-rose-50/80 p-6 text-left shadow-md shadow-rose-100">
+              <h2 className="text-lg font-semibold text-slate-800">{"ログインボーナスアプリ"}</h2>
+              <p className="mt-2 text-sm text-slate-600">
+                {"平日のログインで💮を集めて、自分で決めたご褒美メッセージを受け取ろう"}
               </p>
-              <Button disabled variant="outline" className="mt-auto rounded-full">
-                {"近日公開"}
-              </Button>
+              <Link to="/login-bonus" className="mt-auto">
+                <Button className="mt-4 w-full rounded-full bg-rose-500 text-white hover:bg-rose-400">
+                  {"開く"}
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
