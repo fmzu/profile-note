@@ -23,4 +23,5 @@ export type ProfileBackgroundOption = {
   label: string
   cardClass: string
   sampleClass: string
+  detailClass: string
 }

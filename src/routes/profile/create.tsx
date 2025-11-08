@@ -19,16 +19,12 @@ function CreatePage() {
   if (profile.categories.length === 0) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-sky-100 to-white px-4 sm:px-6">
-        <div className="w-full max-w-lg rounded-3xl bg-white/90 p-8 text-center shadow-xl shadow-sky-100 sm:p-10">
-          <h1 className="text-2xl font-semibold text-slate-800">
-            {
-              "カテゴリがまだえらばれていないみたい"
-            }
+        <div className="w-full max-w-lg rounded-3xl bg-white/90 p-8 text-center shadow-sky-100 shadow-xl sm:p-10">
+          <h1 className="font-semibold text-2xl text-slate-800">
+            {"カテゴリがまだえらばれていないみたい"}
           </h1>
-          <p className="mt-4 text-sm leading-relaxed text-slate-600">
-            {
-              "まずはカテゴリを1つ以上えらんでから内容を入力してみようね。"
-            }
+          <p className="mt-4 text-slate-600 text-sm leading-relaxed">
+            {"まずはカテゴリを1つ以上えらんでから内容を入力してみようね。"}
           </p>
           <Link
             to="/profile/select"
@@ -43,6 +39,7 @@ function CreatePage() {
     )
   }
 
+  // biome-ignore lint/correctness/useHookAtTopLevel: <explanation>
   const readyToComplete = React.useMemo(() => {
     if (profile.name.trim() === "") {
       return false
@@ -91,9 +88,7 @@ function CreatePage() {
                 Step 2
               </p>
               <h1 className="mt-4 font-semibold text-2xl text-slate-800 sm:text-3xl">
-                {
-                  "カードの内容を教えてね"
-                }
+                {"カードの内容を教えてね"}
               </h1>
               <p className="mt-3 text-slate-600 text-sm leading-relaxed sm:text-base">
                 {
@@ -102,9 +97,9 @@ function CreatePage() {
               </p>
               <div className="mt-6 space-y-6 sm:mt-8">
                 <div className="space-y-2">
-                  <label className="font-semibold text-slate-600 text-sm">
+                  <p className="font-semibold text-slate-600 text-sm">
                     {"なまえ"}
-                  </label>
+                  </p>
                   <Input
                     value={profile.name}
                     onChange={handleNameChange}
@@ -113,9 +108,9 @@ function CreatePage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-600">
+                  <p className="font-semibold text-slate-600 text-sm">
                     {"ひとことメッセージ"}
-                  </label>
+                  </p>
                   <Textarea
                     value={profile.message}
                     onChange={handleMessageChange}
@@ -124,7 +119,7 @@ function CreatePage() {
                   />
                 </div>
                 <div className="space-y-3">
-                  <h2 className="text-sm font-semibold text-slate-600">
+                  <h2 className="font-semibold text-slate-600 text-sm">
                     {"背景カラー"}
                   </h2>
                   <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -147,7 +142,7 @@ function CreatePage() {
                           className={buttonClass}
                         >
                           <div className={sampleClass} aria-hidden />
-                          <span className="text-xs font-medium text-slate-600">
+                          <span className="font-medium text-slate-600 text-xs">
                             {option.label}
                           </span>
                           {isSelected ? (
@@ -161,7 +156,7 @@ function CreatePage() {
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <h2 className="text-sm font-semibold text-slate-600">
+                  <h2 className="font-semibold text-slate-600 text-sm">
                     {"カテゴリの内容"}
                   </h2>
                   {profile.categories.map((category) => (
@@ -169,7 +164,7 @@ function CreatePage() {
                       key={category.id}
                       className="space-y-2 rounded-2xl bg-sky-50/70 p-4 shadow-inner shadow-sky-100"
                     >
-                      <p className="text-sm font-semibold text-sky-700">
+                      <p className="font-semibold text-sky-700 text-sm">
                         {category.title}
                       </p>
                       <Textarea
@@ -183,7 +178,7 @@ function CreatePage() {
                     </div>
                   ))}
                 </div>
-                <div className="flex flex-col gap-4 border-t border-slate-100 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-4 border-slate-100 border-t pt-6 sm:flex-row sm:items-center sm:justify-between">
                   <Link to="/profile/select" className="w-full sm:w-auto">
                     <Button
                       variant="ghost"
@@ -195,7 +190,7 @@ function CreatePage() {
                   <Button
                     onClick={handleComplete}
                     disabled={!readyToComplete}
-                    className="w-full rounded-full bg-indigo-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-200 hover:bg-indigo-400 disabled:cursor-not-allowed disabled:bg-slate-300 sm:w-auto sm:px-8 sm:py-3 sm:text-lg"
+                    className="w-full rounded-full bg-indigo-500 px-6 py-3 font-semibold text-base text-white shadow-indigo-200 shadow-lg hover:bg-indigo-400 disabled:cursor-not-allowed disabled:bg-slate-300 sm:w-auto sm:px-8 sm:py-3 sm:text-lg"
                   >
                     {"できた！"}
                   </Button>
@@ -203,13 +198,11 @@ function CreatePage() {
               </div>
             </div>
             <div className="mx-auto w-full max-w-md rounded-3xl bg-gradient-to-br from-sky-200/60 via-sky-100/80 to-white p-5 shadow-lg shadow-sky-100 sm:p-6 lg:mx-0 lg:w-[360px] lg:max-w-none lg:justify-self-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-600 sm:text-sm">
+              <p className="font-semibold text-sky-600 text-xs uppercase tracking-[0.35em] sm:text-sm">
                 Live Preview
               </p>
-              <p className="mt-2 text-xs text-slate-600 sm:text-sm">
-                {
-                  "選んだ背景とテキストがリアルタイムで反映されます。"
-                }
+              <p className="mt-2 text-slate-600 text-xs sm:text-sm">
+                {"選んだ背景とテキストがリアルタイムで反映されます。"}
               </p>
               <div className="mt-4 flex justify-center sm:mt-6">
                 <ProfilePreviewCard profile={profile} />
