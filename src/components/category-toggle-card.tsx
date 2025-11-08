@@ -22,9 +22,7 @@ export function CategoryToggleCard(props: Props) {
       className={cn(baseClass, selectedClass, disabledClass)}
     >
       <span className="text-base font-semibold text-sky-700 sm:text-lg">{props.title}</span>
-      {props.selected ? (
-        <span className="mt-2 block text-xs text-sky-500 sm:text-sm">えらんでくれてありがとう🫧</span>
-      ) : null}
+      {props.selected ? <span className="mt-2 block text-xs text-sky-500 sm:text-sm">えらんだよ</span> : null}
     </button>
   )
 }

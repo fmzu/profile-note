@@ -7,35 +7,34 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50">
-      <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col items-center justify-center px-4 py-12 sm:px-6 lg:py-20">
-        <div className="w-full max-w-3xl rounded-3xl border border-white/70 bg-white/80 p-6 text-center shadow-2xl shadow-sky-100 backdrop-blur sm:p-10">
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-sky-500 sm:text-sm">🩵 MyProfileNote</p>
-          <h1 className="mt-4 text-3xl font-semibold leading-snug text-slate-800 sm:text-4xl">
-            わたしの「すき」を、ふわっと可愛いカードでとじこめよう
-          </h1>
-          <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-            最大4つのカテゴリをえらんで、なまえやひとことを入力するだけ。プレビューはリアルタイムに反映されて、
-            できあがったカードはPNGでダウンロードできます。
+    <div className="min-h-screen bg-gradient-to-br from-white via-sky-50 to-blue-50">
+      <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col items-center justify-center px-4 py-16 sm:px-6">
+        <div className="w-full rounded-3xl border border-white/70 bg-white/90 p-8 shadow-2xl shadow-sky-100 backdrop-blur sm:p-12">
+          <h1 className="text-3xl font-semibold text-slate-800 sm:text-4xl">{"\u30df\u30cb\u30a2\u30d7\u30ea\u3092\u9078\u3093\u3067\u306d"}</h1>
+          <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+            {"\u597d\u304d\u306a\u4f53\u9a13\u3092\u9078\u3093\u3067\u30b9\u30bf\u30fc\u30c8\u3057\u307e\u3057\u3087\u3046\u3002"}
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:mt-10 sm:flex-row sm:flex-wrap">
-            <Link to="/select" className="w-full sm:w-auto">
-              <Button className="w-full rounded-full bg-sky-500 px-6 py-4 text-base font-semibold text-white shadow-lg shadow-sky-200 transition hover:bg-sky-400 hover:shadow-xl sm:px-8 sm:py-6 sm:text-lg">
-                つくってみる
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="flex flex-col rounded-2xl border border-sky-100 bg-sky-50/80 p-6 text-left shadow-md shadow-sky-100">
+              <h2 className="text-lg font-semibold text-slate-800">{"\u30d7\u30ed\u30d5\u30a3\u30fc\u30eb\u5e33\u30a2\u30d7\u30ea"}</h2>
+              <p className="mt-2 text-sm text-slate-600">{"\u30ab\u30c6\u30b4\u30ea\u3092\u9078\u3093\u3067\u30ab\u30fc\u30c9\u3092\u4f5c\u308c\u308b\u3088"}</p>
+              <Link to="/profile" className="mt-auto">
+                <Button className="mt-4 w-full rounded-full bg-sky-500 text-white hover:bg-sky-400">{"\u958b\u304f"}</Button>
+              </Link>
+            </div>
+            <div className="flex flex-col rounded-2xl border border-slate-100 bg-slate-50/80 p-6 text-left shadow-md shadow-slate-100">
+              <h2 className="text-lg font-semibold text-slate-500">
+                {"\u30ed\u30b0\u30a4\u30f3\u30dc\u30fc\u30ca\u30b9\u8a2d\u5b9a\uff08\u6e96\u5099\u4e2d\uff09"}
+              </h2>
+              <p className="mt-2 text-sm text-slate-500">
+                {"\u65e5\u8ab2\u306e\u30dc\u30fc\u30ca\u30b9\u6f14\u51fa\u3092\u8a2d\u5b9a\u3067\u304d\u308b\u30a2\u30d7\u30ea\u3092\u4f5c\u6210\u4e88\u5b9a\u3067\u3059"}
+              </p>
+              <Button disabled variant="outline" className="mt-auto rounded-full">
+                {"\u8fd1\u65e5\u516c\u958b"}
               </Button>
-            </Link>
-            <div className="w-full rounded-2xl bg-white/70 px-5 py-4 text-left text-xs leading-relaxed text-slate-500 shadow-inner sm:w-auto sm:text-sm">
-              <p>フローはかんたん 4 ステップ：</p>
-              <p className="mt-1">① カードの説明を読む</p>
-              <p>② カテゴリをえらぶ</p>
-              <p>③ なまえと内容を入力</p>
-              <p>④ 画像として保存</p>
             </div>
           </div>
         </div>
-        <p className="mt-10 text-xs text-slate-400 sm:mt-12">
-          パステルカラーのやさしいトーンで、安心してプロフィールを届けましょう🫧
-        </p>
       </div>
     </div>
   )

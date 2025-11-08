@@ -15,4 +15,12 @@ export type ProfileData = {
   name: string
   message: string
   categories: ProfileCategory[]
+  backgroundId: string
+}
+
+export type ProfileBackgroundOption = {
+  id: string
+  label: string
+  cardClass: string
+  sampleClass: string
 }

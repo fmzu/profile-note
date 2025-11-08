@@ -3,41 +3,42 @@ applyTo: "**/*"
 ---
 
 # Overview
-MyProfileNote は、スマホ向け縦長カードに最大4つの「好き」カテゴリを配置し、プロフィールカードをその場で画像保存できるSPAです。やさしい文体と即時プレビューを備え、Cloudflare Workers 連携を視野に入れた拡張性の高い構成を目指します。
+プロジェクトは複数のミニアプリを収めたフロントエンド集約体です。現在はプロフィール帳アプリ（MyProfileNote）が `/profile` 配下で稼働しており、今後ログインボーナス設定アプリを `/login-bonus` 配下に追加予定です。いずれのアプリもやさしい体験を目指し、将来的な Cloudflare Workers 連携に備えた構成にします。
 
 ## Directory Structure
-- `src/routes`: 4ページ構成（`index.tsx` `/`, `select.tsx` `/select`, `create.tsx` `/create`, `done.tsx` `/done`）
-- `src/components`: 入力フォーム、プレビューカード、共通UI部品を配置
-- `src/lib`: 状態更新ロジック、html-to-image ラッパー、Hono 用エントリ
-- `src/store`: Zustand + Reducer ストア
-- `src/types`: `profile.ts` などドメイン型定義
-- `src/styles/app.css`: Tailwind カスタムレイヤ
+- `src/routes/profile`: プロフィール帳向けのページ群（`index.tsx`, `select.tsx`, `create.tsx`, `done.tsx`）
+- `src/routes/index.tsx`: ルート選択ページ（アプリの入口）
+- `src/components`: 共通UI（プロフィールカード、カテゴリカードなど）
+- `src/store`: Zustand（Reducerパターン）による共有ストア
+- `src/types`: ドメイン型（プロフィール、カテゴリ、背景設定など）
+- `src/lib`: html-to-image などのユーティリティ
 - `public/`: パステルトーンの静的アセット
+- `src/styles/app.css`: Tailwind カスタムレイヤ
 
 ## Technical Features
 - React 19 + TypeScript 5 + Vite 7
-- @tanstack/react-router によるルーティング
-- Zustand（Reducer パターン）でページ間状態を保持
-- Tailwind CSS で無地パステル／角丸／余白16pxを実現
+- @tanstack/react-router のファイルベースルーティング
+- Zustand + Reducer でアプリ間共有可能な状態管理を実装
+- Tailwind CSS による柔らかなパステルUI
 - html-to-image でプレビューを PNG ダウンロード
-- 単体テスト（Reducer）とE2E（入力〜保存）を npm scripts で実行
-- Cloudflare Pages + Workers（Hono）展開を見据えた構成
+- npm scripts で Reducer 単体テストと E2E テストを実行予定
+- Cloudflare Pages + Workers + Hono での将来展開を想定
 
 ## Decoupled Design
-- ルートはフロー制御に専念し、UI は `src/components` のプレゼンテーション層へ委譲
-- 状態更新は `src/store/profile-store.ts` の Reducer 経由に限定し、副作用は `src/lib` のユーティリティで隔離
-- html-to-image やダウンロード処理はファサード経由で呼び出し、テスト容易性を確保
-- Cloudflare Workers 連携は `src/lib/hono` に分離し、ブラウザ機能と疎結合を維持
+- ルートファイルはページフローに専念し、UI は `src/components` に集約
+- 状態更新は `src/store/profile-context.tsx` の Reducer 経由に制限し、副作用は `src/lib` に切り出し
+- html-to-image などブラウザ依存処理はファサード化してテスト容易性を確保
+- 各アプリは独立ディレクトリ配下にまとめ、将来の `/login-bonus` 追加時も干渉しない構造を維持
 
 ## Core Location
-- ドメイン型: `src/types/profile.ts`
-- 状態管理: `src/store/profile-store.ts`
-- UI コンポーネント: `src/components/profile-card.tsx`, `src/components/category-selector.tsx`, `src/components/profile-form.tsx`
-- 画面ロジック: `src/routes/index.tsx`, `src/routes/select.tsx`, `src/routes/create.tsx`, `src/routes/done.tsx`
-- 画像出力: `src/lib/html-to-image-client.ts`
-- テスト: `src/store/profile-store.test.ts`, `e2e/profile-card.spec.ts`
+- プロフィール型: `src/types/types.ts`
+- プロフィール状態: `src/store/profile-context.tsx`
+- プレビュー＆カテゴリUI: `src/components/profile-preview-card.tsx`, `src/components/category-toggle-card.tsx`
+- プロフィールルート: `src/routes/profile/index.tsx`, `select.tsx`, `create.tsx`, `done.tsx`
+- 画像保存処理: `src/lib/html-to-image-client.ts`
+- 初期選択ページ: `src/routes/index.tsx`
 
 ## System Independence
-- `npm run dev` でローカル動作（ブラウザ内完結）
-- ブラウザAPIのみでプレビュー生成と状態保持が完結し、オフラインでもフローが成立
-- Cloudflare 連携はオプションであり、未接続でも既存UXに影響しない
+- `npm run dev` でローカル動作（ブラウザのみで完結）
+- 状態保持・画像生成はブラウザAPIのみで実行でき、オフラインでもプロフィールフローが成立
+- Cloudflare 連携はオプションで、未設定でも既存機能に影響しない

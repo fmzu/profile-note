@@ -27,7 +27,7 @@ export function ProfilePreviewCard(props: Props) {
   const placeholderItems = Array.from({ length: placeholders })
 
   return (
-    <div className="mx-auto w-full max-w-sm rounded-3xl bg-sky-100/70 p-5 shadow-xl shadow-sky-100">
+    <div className="mx-auto w-[320px] max-w-full rounded-3xl bg-sky-100/70 p-5 shadow-xl shadow-sky-100 sm:w-[360px]">
       <div className="flex flex-col items-center border-b border-white/70 pb-4 text-center">
         <span className="text-sm text-sky-600">なまえ</span>
         <h2 className="mt-1 text-2xl font-semibold text-sky-800">
@@ -42,7 +42,7 @@ export function ProfilePreviewCard(props: Props) {
         {placeholderItems.map((_value, index) => (
           <div
             key={`placeholder-${index}`}
-            className="h-36 rounded-lg"
+            className="h-36 rounded-lg bg-sky-100/70"
             aria-hidden
           />
         ))}

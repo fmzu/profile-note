@@ -1,5 +1,6 @@
 import * as React from "react"
-import type { CategoryOption, ProfileCategory, ProfileData } from "@/types/types"
+import { defaultProfileBackgroundId, profileBackgroundOptions } from "@/constants"
+import type { CategoryOption, ProfileBackgroundOption, ProfileCategory, ProfileData } from "@/types/types"
 
 type Props = {
   children: React.ReactNode
@@ -13,22 +14,24 @@ type UpdateCategoryContentProps = {
 type ProfileStoreValue = {
   profile: ProfileData
   availableCategories: CategoryOption[]
+  backgroundOptions: ProfileBackgroundOption[]
   addCustomCategory: (title: string) => void
   toggleCategorySelection: (categoryId: string) => void
   updateProfileName: (value: string) => void
   updateProfileMessage: (value: string) => void
   updateCategoryContent: (props: UpdateCategoryContentProps) => void
+  updateBackgroundId: (backgroundId: string) => void
   resetProfile: () => void
 }
 
 const presetCategoryTitles: string[] = [
   "すきなこと",
-  "すきな食べもの",
-  "すきな場所",
-  "すきな音楽",
+  "すきなたべもの",
+  "すきなばしょ",
+  "すきなおんがく",
   "すきなゲーム",
-  "すきな本",
-  "すきな色",
+  "すきなほん",
+  "すきないろ",
 ]
 
 const ProfileContext = React.createContext<ProfileStoreValue | undefined>(undefined)
@@ -38,6 +41,7 @@ function createInitialProfile(): ProfileData {
     name: "",
     message: "",
     categories: [],
+    backgroundId: defaultProfileBackgroundId,
   }
 }
 
@@ -176,6 +180,24 @@ export function ProfileProvider(props: Props) {
     })
   }
 
+  function updateBackgroundId(backgroundId: string) {
+    const exists = profileBackgroundOptions.some(function (option) {
+      return option.id === backgroundId
+    })
+    if (!exists) {
+      return
+    }
+    setProfile(function (previous) {
+      if (previous.backgroundId === backgroundId) {
+        return previous
+      }
+      return {
+        ...previous,
+        backgroundId,
+      }
+    })
+  }
+
   function resetProfile() {
     setProfile(createInitialProfile())
     setAvailableCategories(createInitialOptions())
@@ -186,11 +208,13 @@ export function ProfileProvider(props: Props) {
       return {
         profile,
         availableCategories,
+        backgroundOptions: profileBackgroundOptions,
         addCustomCategory,
         toggleCategorySelection,
         updateProfileName,
         updateProfileMessage,
         updateCategoryContent,
+        updateBackgroundId,
         resetProfile,
       }
     },
@@ -203,7 +227,7 @@ export function ProfileProvider(props: Props) {
 export function useProfileStore(): ProfileStoreValue {
   const context = React.useContext(ProfileContext)
   if (!context) {
-    throw new Error("ProfileProvider の内側で useProfileStore を使用してください。")
+    throw new Error("useProfileStore must be used within ProfileProvider")
   }
   return context
 }

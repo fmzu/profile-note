@@ -18,17 +18,15 @@ export const Route = createRootRoute({
       },
       {
         name: "description",
-        content:
-          "MyProfileNote は、好きなカテゴリを選んでプロフィールカードを作り、PNGとして保存できるアプリです。",
+        content: "MyProfile Suite bundles a profile notebook and a login bonus planner with gentle pastel UI.",
       },
       {
         property: "og:title",
-        content: "MyProfileNote",
+        content: "MyProfile Suite",
       },
       {
         property: "og:description",
-        content:
-          "好きなカテゴリを最大4つ選んで、かわいいプロフィールカードを作成・保存しましょう。",
+        content: "Create cute profile cards today and stay tuned for the upcoming login bonus experience.",
       },
     ],
     links: [

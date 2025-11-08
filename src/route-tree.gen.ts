@@ -9,31 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SelectRouteImport } from './routes/select'
 import { Route as ErrorRouteImport } from './routes/error'
-import { Route as DoneRouteImport } from './routes/done'
-import { Route as CreateRouteImport } from './routes/create'
 import { Route as ApiRouteImport } from './routes/api'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProfileIndexRouteImport } from './routes/profile/index'
+import { Route as ProfileSelectRouteImport } from './routes/profile/select'
+import { Route as ProfileDoneRouteImport } from './routes/profile/done'
+import { Route as ProfileCreateRouteImport } from './routes/profile/create'
 
-const SelectRoute = SelectRouteImport.update({
-  id: '/select',
-  path: '/select',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ErrorRoute = ErrorRouteImport.update({
   id: '/error',
   path: '/error',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DoneRoute = DoneRouteImport.update({
-  id: '/done',
-  path: '/done',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CreateRoute = CreateRouteImport.update({
-  id: '/create',
-  path: '/create',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiRoute = ApiRouteImport.update({
@@ -46,77 +32,102 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileIndexRoute = ProfileIndexRouteImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileSelectRoute = ProfileSelectRouteImport.update({
+  id: '/profile/select',
+  path: '/profile/select',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileDoneRoute = ProfileDoneRouteImport.update({
+  id: '/profile/done',
+  path: '/profile/done',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileCreateRoute = ProfileCreateRouteImport.update({
+  id: '/profile/create',
+  path: '/profile/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api': typeof ApiRoute
-  '/create': typeof CreateRoute
-  '/done': typeof DoneRoute
   '/error': typeof ErrorRoute
-  '/select': typeof SelectRoute
+  '/profile/create': typeof ProfileCreateRoute
+  '/profile/done': typeof ProfileDoneRoute
+  '/profile/select': typeof ProfileSelectRoute
+  '/profile': typeof ProfileIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api': typeof ApiRoute
-  '/create': typeof CreateRoute
-  '/done': typeof DoneRoute
   '/error': typeof ErrorRoute
-  '/select': typeof SelectRoute
+  '/profile/create': typeof ProfileCreateRoute
+  '/profile/done': typeof ProfileDoneRoute
+  '/profile/select': typeof ProfileSelectRoute
+  '/profile': typeof ProfileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api': typeof ApiRoute
-  '/create': typeof CreateRoute
-  '/done': typeof DoneRoute
   '/error': typeof ErrorRoute
-  '/select': typeof SelectRoute
+  '/profile/create': typeof ProfileCreateRoute
+  '/profile/done': typeof ProfileDoneRoute
+  '/profile/select': typeof ProfileSelectRoute
+  '/profile/': typeof ProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api' | '/create' | '/done' | '/error' | '/select'
+  fullPaths:
+    | '/'
+    | '/api'
+    | '/error'
+    | '/profile/create'
+    | '/profile/done'
+    | '/profile/select'
+    | '/profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api' | '/create' | '/done' | '/error' | '/select'
-  id: '__root__' | '/' | '/api' | '/create' | '/done' | '/error' | '/select'
+  to:
+    | '/'
+    | '/api'
+    | '/error'
+    | '/profile/create'
+    | '/profile/done'
+    | '/profile/select'
+    | '/profile'
+  id:
+    | '__root__'
+    | '/'
+    | '/api'
+    | '/error'
+    | '/profile/create'
+    | '/profile/done'
+    | '/profile/select'
+    | '/profile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiRoute: typeof ApiRoute
-  CreateRoute: typeof CreateRoute
-  DoneRoute: typeof DoneRoute
   ErrorRoute: typeof ErrorRoute
-  SelectRoute: typeof SelectRoute
+  ProfileCreateRoute: typeof ProfileCreateRoute
+  ProfileDoneRoute: typeof ProfileDoneRoute
+  ProfileSelectRoute: typeof ProfileSelectRoute
+  ProfileIndexRoute: typeof ProfileIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/select': {
-      id: '/select'
-      path: '/select'
-      fullPath: '/select'
-      preLoaderRoute: typeof SelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/error': {
       id: '/error'
       path: '/error'
       fullPath: '/error'
       preLoaderRoute: typeof ErrorRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/done': {
-      id: '/done'
-      path: '/done'
-      fullPath: '/done'
-      preLoaderRoute: typeof DoneRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/create': {
-      id: '/create'
-      path: '/create'
-      fullPath: '/create'
-      preLoaderRoute: typeof CreateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api': {
@@ -133,16 +144,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profile/': {
+      id: '/profile/'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/select': {
+      id: '/profile/select'
+      path: '/profile/select'
+      fullPath: '/profile/select'
+      preLoaderRoute: typeof ProfileSelectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/done': {
+      id: '/profile/done'
+      path: '/profile/done'
+      fullPath: '/profile/done'
+      preLoaderRoute: typeof ProfileDoneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/create': {
+      id: '/profile/create'
+      path: '/profile/create'
+      fullPath: '/profile/create'
+      preLoaderRoute: typeof ProfileCreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiRoute: ApiRoute,
-  CreateRoute: CreateRoute,
-  DoneRoute: DoneRoute,
   ErrorRoute: ErrorRoute,
-  SelectRoute: SelectRoute,
+  ProfileCreateRoute: ProfileCreateRoute,
+  ProfileDoneRoute: ProfileDoneRoute,
+  ProfileSelectRoute: ProfileSelectRoute,
+  ProfileIndexRoute: ProfileIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -5,11 +5,11 @@ schema: {}
 
 # MyProfileNote App
 
-MyProfileNote App は、カテゴリ選択からカード生成までをワンフローで提供するプロフィール帳アプリケーションです。
+MyProfileNote App は、カテゴリ選択からカード生成までを `/profile` 配下で提供するプロフィール帳アプリケーションです。
 
 ## What We Provide
 
-やさしいトーンのUIで、最大4件のカテゴリを選び、内容を入力し、即時プレビューをPNGとして保存できる体験を提供します。
+やさしいパステルトーンのUIで、最大4件のカテゴリを選び、内容を入力し、即時プレビューを PNG として保存できる体験を提供します。
 
 ## Target Users
 
@@ -19,17 +19,17 @@ MyProfileNote App は、カテゴリ選択からカード生成までをワン�
 
 ## Core Value Proposition
 
-ステップガイドと田の字レイアウトにより、初めてでも迷わずカード作成でき、完成時に達成感を得られます。
+ステップガイドと素朴なカードレイアウトにより、初めてでも迷わずカード作成でき、完成時に達成感を得られます。
 
 ## Technical Architecture
 
 - Frontend: React + TypeScript + Vite
-- Routing: @tanstack/react-router（`/` → `/select` → `/create` → `/done`）
-- State: Zustand（Reducer パターン）でグローバル状態管理
-- Styling: Tailwind CSS（無地パステル、角丸、余白16px）
-- Image Output: html-to-image でプレビューをPNG化
-- Backend (Optional): Hono on Cloudflare Workers でテンプレート／プリセットAPIを提供予定
+- Routing: @tanstack/react-router（`/profile` → `/profile/select` → `/profile/create` → `/profile/done`）
+- State: Zustand + Reducer パターンでグローバル状態管理
+- Styling: Tailwind CSS（無地パステル／角丸／余白16px）
+- Image Output: html-to-image でプレビューを PNG 化
+- Backend (Optional): Hono on Cloudflare Workers でテンプレート共有 API を提供予定
 
 ## Context (Optional)
 
-Reducer のテストとE2Eテストを整備し、将来のマルチテーマ展開やテンプレート共有機能に対応できるようにします。
+Reducer のテストと E2E テストを整備し、今後の背景テーマ拡張やテンプレート共有機能にも対応できるようにします。
