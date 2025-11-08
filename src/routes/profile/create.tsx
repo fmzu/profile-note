@@ -22,12 +22,12 @@ function CreatePage() {
         <div className="w-full max-w-lg rounded-3xl bg-white/90 p-8 text-center shadow-xl shadow-sky-100 sm:p-10">
           <h1 className="text-2xl font-semibold text-slate-800">
             {
-              "\u30ab\u30c6\u30b4\u30ea\u304c\u307e\u3060\u3048\u3089\u3070\u308c\u3066\u3044\u306a\u3044\u307f\u305f\u3044"
+              "カテゴリがまだえらばれていないみたい"
             }
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-slate-600">
             {
-              "\u307e\u305a\u306f\u30ab\u30c6\u30b4\u30ea\u30921\u3064\u4ee5\u4e0a\u3048\u3089\u3093\u3067\u304b\u3089\u5185\u5bb9\u3092\u5165\u529b\u3057\u3066\u307f\u3088\u3046\u306d\u3002"
+              "まずはカテゴリを1つ以上えらんでから内容を入力してみようね。"
             }
           </p>
           <Link
@@ -35,7 +35,7 @@ function CreatePage() {
             className="mt-8 inline-block w-full sm:w-auto"
           >
             <Button className="w-full rounded-full bg-sky-500 px-8 py-3 text-white hover:bg-sky-400 sm:w-auto">
-              {"\u30ab\u30c6\u30b4\u30ea\u4e00\u89a7\u306b\u3082\u3069\u308b"}
+              {"カテゴリ一覧にもどる"}
             </Button>
           </Link>
         </div>
@@ -87,45 +87,45 @@ function CreatePage() {
         <div className="rounded-3xl bg-white/85 p-6 shadow-2xl shadow-sky-100 backdrop-blur sm:p-10">
           <div className="mx-auto grid max-w-[1260px] gap-8 lg:grid-cols-[minmax(0,1.6fr)_360px] lg:gap-10">
             <div className="w-full max-w-3xl lg:justify-self-start">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-500 sm:text-sm">
+              <p className="font-semibold text-sky-500 text-xs uppercase tracking-[0.35em] sm:text-sm">
                 Step 2
               </p>
-              <h1 className="mt-4 text-2xl font-semibold text-slate-800 sm:text-3xl">
+              <h1 className="mt-4 font-semibold text-2xl text-slate-800 sm:text-3xl">
                 {
-                  "\u30ab\u30fc\u30c9\u306e\u5185\u5bb9\u3092\u6559\u3048\u3066\u306d"
+                  "カードの内容を教えてね"
                 }
               </h1>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+              <p className="mt-3 text-slate-600 text-sm leading-relaxed sm:text-base">
                 {
-                  "\u306a\u307e\u3048\u3084\u30e1\u30c3\u30bb\u30fc\u30b8\u3001\u30ab\u30c6\u30b4\u30ea\u3054\u3068\u306e\u30a8\u30d4\u30bd\u30fc\u30c9\u3092\u66f8\u3044\u3066\u306d\u3002\u53f3\u5074\u306e\u30d7\u30ec\u30d3\u30e5\u30fc\u306f\u3059\u3050\u66f4\u65b0\u3055\u308c\u308b\u3088\u3002"
+                  "なまえやメッセージ、カテゴリごとのエピソードを書いてね。右側のプレビューはすぐ更新されるよ。"
                 }
               </p>
               <div className="mt-6 space-y-6 sm:mt-8">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-600">
-                    {"\u306a\u307e\u3048"}
+                  <label className="font-semibold text-slate-600 text-sm">
+                    {"なまえ"}
                   </label>
                   <Input
                     value={profile.name}
                     onChange={handleNameChange}
-                    placeholder="\u4f8b: \u3055\u304f\u3089"
+                    placeholder="例: さくら"
                     className="rounded-xl border-sky-200 bg-white/90"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-slate-600">
-                    {"\u3072\u3068\u3053\u3068\u30e1\u30c3\u30bb\u30fc\u30b8"}
+                    {"ひとことメッセージ"}
                   </label>
                   <Textarea
                     value={profile.message}
                     onChange={handleMessageChange}
-                    placeholder="\u3044\u307e\u306e\u304d\u3082\u3061\u3084\u81ea\u5df1\u7d39\u4ecb\u3092\u66f8\u3044\u3066\u307f\u3088\u3046\ud83e\udee7"
+                    placeholder="いまのきもちや自己紹介を書いてみよう🫧"
                     className="min-h-28 rounded-xl border-sky-200 bg-white/90"
                   />
                 </div>
                 <div className="space-y-3">
                   <h2 className="text-sm font-semibold text-slate-600">
-                    {"\u80cc\u666f\u30ab\u30e9\u30fc"}
+                    {"背景カラー"}
                   </h2>
                   <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                     {backgroundOptions.map((option) => {
@@ -152,7 +152,7 @@ function CreatePage() {
                           </span>
                           {isSelected ? (
                             <span className="text-[10px] text-indigo-500">
-                              {"\u3053\u306e\u8272\u306b\u3059\u308b"}
+                              {"この色にする"}
                             </span>
                           ) : null}
                         </button>
@@ -162,7 +162,7 @@ function CreatePage() {
                 </div>
                 <div className="space-y-4">
                   <h2 className="text-sm font-semibold text-slate-600">
-                    {"\u30ab\u30c6\u30b4\u30ea\u306e\u5185\u5bb9"}
+                    {"カテゴリの内容"}
                   </h2>
                   {profile.categories.map((category) => (
                     <div
@@ -177,7 +177,7 @@ function CreatePage() {
                         onChange={(event) => {
                           handleCategoryChange(category.id, event)
                         }}
-                        placeholder="\u305d\u306e\u30ab\u30c6\u30b4\u30ea\u306e\u300c\u3059\u304d\u300d\u3092\u304f\u308f\u3057\u304f\u66f8\u3044\u3066\u306d"
+                        placeholder="そのカテゴリの「すき」をくわしく書いてね"
                         className="min-h-24 rounded-xl border-sky-200 bg-white/90"
                       />
                     </div>
@@ -189,7 +189,7 @@ function CreatePage() {
                       variant="ghost"
                       className="w-full rounded-full text-slate-500 hover:text-slate-700 sm:w-auto"
                     >
-                      {"\u30ab\u30c6\u30b4\u30ea\u3092\u8abf\u6574\u3059\u308b"}
+                      {"カテゴリを調整する"}
                     </Button>
                   </Link>
                   <Button
@@ -197,7 +197,7 @@ function CreatePage() {
                     disabled={!readyToComplete}
                     className="w-full rounded-full bg-indigo-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-200 hover:bg-indigo-400 disabled:cursor-not-allowed disabled:bg-slate-300 sm:w-auto sm:px-8 sm:py-3 sm:text-lg"
                   >
-                    {"\u3067\u304d\u305f\uff01"}
+                    {"できた！"}
                   </Button>
                 </div>
               </div>
@@ -208,7 +208,7 @@ function CreatePage() {
               </p>
               <p className="mt-2 text-xs text-slate-600 sm:text-sm">
                 {
-                  "\u9078\u3093\u3060\u80cc\u666f\u3068\u30c6\u30ad\u30b9\u30c8\u304c\u30ea\u30a2\u30eb\u30bf\u30a4\u30e0\u3067\u53cd\u6620\u3055\u308c\u307e\u3059\u3002"
+                  "選んだ背景とテキストがリアルタイムで反映されます。"
                 }
               </p>
               <div className="mt-4 flex justify-center sm:mt-6">
